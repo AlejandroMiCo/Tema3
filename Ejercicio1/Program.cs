@@ -31,8 +31,11 @@ namespace Ejercicio1
             };
             Console.CursorVisible = false;
             pintaMenu(opciones, opcion);
+            
             do
             {
+            string ip;
+            int ram;
                 ConsoleKeyInfo tecla = Console.ReadKey();
                 switch (tecla.Key)
                 {
@@ -44,35 +47,80 @@ namespace Ejercicio1
                         break;
                     case ConsoleKey.Spacebar:
                         seleccion = opcion;
-                        do
+
+                        switch (opcion)
                         {
-                            switch (opcion)
-                            {
-                                case 0:
-                                    int ram;
-                                    string ip;
-                                    pedirDatos(out ram, out ip);
+                            case 0:
+                                pedirDatos(out ram, out ip);
+
+                                if (ips.ContainsKey(ip))
+                                {
+                                    Console.WriteLine(
+                                        "Ya se encuentra ese elemento en la lista de ips"
+                                    );
+                                }
+                                else
+                                {
                                     ips.Add(ip, ram);
+                                }
+                                Console.ReadKey();
+                                break;
+                            case 1:
+                                Console.WriteLine(
+                                    "Por favor introduzca el valor de la ip que desea eliminar:"
+                                );
+                                ip = Console.ReadLine();
+                                ValidadorDeIp(out ip);
+                                ips.Remove(ip);
+                                break;
 
-                                    break;
-                                case 1:
+                            case 2:
+                                
+                                foreach (KeyValuePair<string, int> de in ips)
+                                {
+                                    Console.WriteLine(
+                                        $"La ip {de.Key} , tiene {de.Value} Gb de ram"
+                                    );
+                                }
+                                Console.ReadKey();
 
-                                    break;
+                                break;
+                            case 3:
 
-                                case 2:
+                                string ipAValidar;
+                                do
+                                {
+                                    Console.WriteLine("Que elemento desea ver?(elija segun la ip)");
+                                    ipAValidar = Console.ReadLine();
 
-                                    break;
+                                    ValidadorDeIp(out ipAValidar);
 
-                                case 3:
-                                    break;
-                                case 4:
-                                    Console.WriteLine("Hasta pronto!!");
-                                    break;
+                                    if (!ips.ContainsKey(ipAValidar))
+                                    {
+                                        Console.WriteLine(
+                                            "No se ha encontrado la ip deseada, por favor intentelo de nuveo"
+                                        );
+                                    }
+                                } while (!ips.ContainsKey(ipAValidar));
 
-                                default:
-                                    break;
-                            }
-                        } while (opcion != 4);
+                                Console.WriteLine(
+                                    $"La ip {ipAValidar} , tiene {ips[ipAValidar]} Gb de ram"
+                                );
+                                Console.ReadKey();
+
+                                break;
+                            case 4:
+                                Console.WriteLine("Hasta pronto!!");
+                                Console.ReadKey();
+
+                                break;
+
+                            default:
+                                Console.WriteLine("Opcion no valida");
+                                Console.ReadKey();
+
+                                break;
+                        }
                         break;
                     case ConsoleKey.Escape:
                         seleccion = opciones.Length - 1;
@@ -106,44 +154,9 @@ namespace Ejercicio1
         public static void pedirDatos(out int ram, out string ip)
         {
             bool isInt;
-            int number;
-            bool isValidNumber;
-            bool isValidIp = true;
             bool isValidRam = true;
 
-            do
-            {
-                Console.WriteLine("introduzca la ip del dispositivo:");
-               ip = Console.ReadLine();
-                string[] partes = ip.Split('.');
-
-                if (partes.Length != 4)
-                {
-                    Console.WriteLine("La Ip no contiene los valores necesarios");
-                    isValidIp = false;
-                }
-                else
-                {
-                    foreach (string parte in partes)
-                    {
-                        isValidNumber = int.TryParse(parte, out number);
-
-                        if (!isValidNumber)
-                        {
-                            Console.WriteLine("Alguno de lo datos introducidos no es un entero");
-                            isValidIp = false;
-                        }
-                        if (number < 0 || number > 255)
-                        {
-                            Console.WriteLine(
-                                "Alguno de los datos introducidos no corresponde con los valores de una IPs"
-                            );
-                            isValidIp = false;
-                        }
-                    }
-                }
-            } while (!isValidIp);
-
+            ValidadorDeIp(out ip);
 
             do
             {
@@ -162,6 +175,49 @@ namespace Ejercicio1
                     isValidRam = false;
                 }
             } while (!isValidRam);
+        }
+
+        private static bool ValidadorDeIp(out string ip)
+        {
+            bool isValidIp = true;
+            int number;
+            bool isValidNumber;
+
+            do
+            {
+                isValidIp = true;
+                Console.WriteLine("introduzca la ip del dispositivo:");
+                ip = Console.ReadLine();
+                string[] partes = ip.Split('.');
+
+                if (partes.Length != 4)
+                {
+                    Console.WriteLine("La Ip no contiene los valores necesarios");
+                    isValidIp = false;
+                }
+                else
+                {
+                    for (int i = 0; i < partes.Length && isValidIp; i++)
+                    {
+                        isValidNumber = int.TryParse(partes[i], out number);
+
+                        if (!isValidNumber)
+                        {
+                            Console.WriteLine("Alguno de lo datos introducidos no es un entero");
+                            isValidIp = false;
+                        }
+                        if (number < 0 || number > 255)
+                        {
+                            Console.WriteLine(
+                                "Alguno de los datos introducidos no corresponde con los valores de una IPs"
+                            );
+                            isValidIp = false;
+                        }
+                    }
+                }
+            } while (!isValidIp);
+
+            return isValidIp;
         }
     }
 }
