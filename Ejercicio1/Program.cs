@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1
 {
-    internal static class Program
+    internal static class Program// no informa al usuario.  Eliminar: pide dos veces la IP. Bucle inf si no hay datos. Si ram no valida bucle inf.
     {
         static void Main(string[] args)
         {
             Dictionary<String, int> ips = new Dictionary<string, int>();
 
-            ips.Add("255.255.255.0", 8);
-            ips.Add("255.2555.0.0", 8);
-            ips.Add("255.0.0.0", 16);
-            ips.Add("255.255.255.16", 16);
+            //ips.Add("255.255.255.0", 8);
+            //ips.Add("255.2555.0.0", 8);
+            //ips.Add("255.0.0.0", 16);
+            //ips.Add("255.255.255.16", 16);
 
             int opcion = 0;
             int seleccion = -1;
@@ -91,9 +91,9 @@ namespace Ejercicio1
                                 do
                                 {
                                     Console.WriteLine("Que elemento desea ver?(elija segun la ip)");
-                                    ipAValidar = Console.ReadLine();
-
                                     ValidadorDeIp(out ipAValidar);
+                                    
+
 
                                     if (!ips.ContainsKey(ipAValidar))
                                     {
