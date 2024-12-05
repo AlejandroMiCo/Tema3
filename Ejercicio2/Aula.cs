@@ -62,35 +62,63 @@ internal class Aula
         return acu/notas.GetLength(0);
     }
 
-    public void VisualizarNotasAlumno(int[,] notas, int alumno)
+    /// Esto va en la calse menu :D
+
+    //public void VisualizarNotasAlumno(int[,] notas, int alumno)
+    //{
+    //    int[] notasAlumno = new int[notas.GetLength(1)];
+
+    //    for (int i = 0; i < notas.GetLength(1); i++)
+    //    {
+    //        notasAlumno[i] = notas[alumno, i];
+    //    }
+
+    //    Console.WriteLine($"%3{notasAlumno[0]} %3{notasAlumno[2]} %3{notasAlumno[2]} %3{notasAlumno[3]}");
+    //}
+
+    //public void VisualizarNotasAsignatura(int[,] notas, int asignatura)
+    //{
+    //    int[] notasAsignauras = new int[notas.GetLength(0)];
+
+    //    for (int i = 0; i < notas.GetLength(0); i++)
+    //    {
+    //        notasAsignauras[i] = notas[i, asignatura];
+    //    }
+
+    //    Console.WriteLine($"%3{notasAsignauras[0]} %3{notasAsignauras[2]} %3{notasAsignauras[2]} %3{notasAsignauras[3]}");
+    //}
+
+    public void NotasMaxAndMin(int[,] notas,int alumno, out int max, out int min)
     {
-        int[] notasAlumno = new int[notas.GetLength(1)];
-
-        for (int i = 0; i < notas.GetLength(1); i++)
-        {
-            notasAlumno[i] = notas[alumno, i];
-        }
-
-        Console.WriteLine($"%3{notasAlumno[0]} %3{notasAlumno[2]} %3{notasAlumno[2]} %3{notasAlumno[3]}");
-    }
-
-    public void VisualizarNotasAsignatura(int[,] notas, int asignatura)
-    {
-        int[] notasAsignauras = new int[notas.GetLength(0)];
+        max = notas[alumno, 0];
+        min = notas[alumno, 0];
 
         for (int i = 0; i < notas.GetLength(0); i++)
         {
-            notasAsignauras[i] = notas[i, asignatura];
-        }
+            if (notas[alumno,i] > max)
+            {
+                max = notas[alumno, i];
+            }
 
-        Console.WriteLine($"%3{notasAsignauras[0]} %3{notasAsignauras[2]} %3{notasAsignauras[2]} %3{notasAsignauras[3]}");
+            if (notas[alumno, i] < min)
+            {
+                min = notas[alumno, i];
+            }
+        }
     }
 
+    public void MostrarTabla(int[,] notas)
+    {
+        for (int i = 0; i < notas.Length; i++)
+        {
+            if (i%4==0)
+            {
+                Console.WriteLine();
+            }
+        }
+    }
 
 }
-
-
-
 
 
 public enum Asignaturas
