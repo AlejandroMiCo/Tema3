@@ -57,18 +57,18 @@ namespace Ejercicio1    //Preguntar a curro si ya esta validado.No tiene pinta
                         {
                             case 0:
 
-                                pedirDatos(out ram, out ip);
+                               // pedirDatos(out ram, out ip);
 
-                                if (ips.ContainsKey(ip))
-                                {
-                                    Console.WriteLine(
-                                        "Ya se encuentra ese elemento en la lista de ips"
-                                    );
-                                }
-                                else
-                                {
-                                     .Add(ip, ram);
-                                }
+                                //if (ips.ContainsKey(ip))
+                                //{
+                                //    Console.WriteLine(
+                                //        "Ya se encuentra ese elemento en la lista de ips"
+                                //    );
+                                //}
+                                //else
+                                //{
+                                //     .Add(ip, ram);
+                                //}
 
                                 Console.WriteLine("Se ha añadido correctamente e elemento");
                                 Console.ReadKey();
@@ -83,8 +83,8 @@ namespace Ejercicio1    //Preguntar a curro si ya esta validado.No tiene pinta
                                 }
                                 else
                                 {
-                                    ValidadorDeIp(out ip);
-                                    ips.Remove(ip);
+                                    //ValidadorDeIp(out ip);
+                                   // ips.Remove(ip);
                                     Console.WriteLine("Se ha eliminado correctamente el elemento");
                                 }
                                 break;
@@ -121,27 +121,27 @@ namespace Ejercicio1    //Preguntar a curro si ya esta validado.No tiene pinta
                                     string ipAValidar;
                                     bool ipEncontrada;
 
-                                    do
-                                    {
-                                        ValidadorDeIp(out ipAValidar);
+                                    //do
+                                    //{
+                                    //   // ValidadorDeIp(out ipAValidar);
 
-                                        if (!ips.ContainsKey(ipAValidar))
-                                        {
-                                            Console.WriteLine(
-                                                "No se ha encontrado la ip deseada");
-                                            Console.ReadKey();
-                                            ipEncontrada = false;
+                                    //    if (!ips.ContainsKey(ipAValidar))
+                                    //    {
+                                    //        Console.WriteLine(
+                                    //            "No se ha encontrado la ip deseada");
+                                    //        Console.ReadKey();
+                                    //        ipEncontrada = false;
 
-                                        }
-                                        else
-                                        {
-                                            ipEncontrada = true;
-                                            Console.WriteLine(
-                                            $"La ip {ipAValidar} , tiene {ips[ipAValidar]} Gb de ram");
-                                            Console.ReadKey();
+                                    //    }
+                                    //    else
+                                    //    {
+                                    //        ipEncontrada = true;
+                                    //        Console.WriteLine(
+                                    //        $"La ip {ipAValidar} , tiene {ips[ipAValidar]} Gb de ram");
+                                    //        Console.ReadKey();
 
-                                        }
-                                    } while (ipEncontrada);
+                                    //    }
+                                    //} while (ipEncontrada);
                                 }
                                 break;
                             case 4:
@@ -186,43 +186,43 @@ namespace Ejercicio1    //Preguntar a curro si ya esta validado.No tiene pinta
             }
         }
 
-        public static void pedirDatos(out string ram, out string ip)
-        {
-            bool isValidRam;
-            bool isValidIp;
+        //public static void pedirDatos(out string ram, out string ip)
+        //{
+        //    bool isValidRam;
+        //    bool isValidIp;
 
-            do
-            {
-                Console.WriteLine("Por favor introduca el valor de la ip del dispositivo");
-                ip = Console.ReadLine();
-                isValidIp = ValidadorDeIp(ip);
+        //    do
+        //    {
+        //        Console.WriteLine("Por favor introduca el valor de la ip del dispositivo");
+        //        ip = Console.ReadLine();
+        //        isValidIp = ValidadorDeIp(ip);
 
-            } while (!isValidIp);
+        //    } while (!isValidIp);
 
-            do
-            {
-                Console.WriteLine("Por favor introduca el valor de la ram del dispositivo");
-                isValidRam = ValidadorDeIp(ram);
+        //    do
+        //    {
+        //        Console.WriteLine("Por favor introduca el valor de la ram del dispositivo");
+        //        isValidRam = ValidadorDeIp(ram);
 
-            } while (!isValidRam);
-        }
+        //    } while (!isValidRam);
+        //}
 
-        public static bool ValidadorDeRam(string out ram)
-        {
-            bool isInt = int.TryParse(ram, out int ramN);
+        //public static bool ValidadorDeRam(string out ram)
+        //{
+        //    bool isInt = int.TryParse(ram, out int ramN);
 
-            if (!isInt)
-            {
-                return false;
-            }
+        //    if (!isInt)
+        //    {
+        //        return false;
+        //    }
 
-            if (ramN < 0)
-            {
-                return false;
-            }
+        //    if (ramN < 0)
+        //    {
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private static bool ValidadorDeIp(string ip)
         {

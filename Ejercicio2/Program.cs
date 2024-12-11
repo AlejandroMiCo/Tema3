@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ejercicio2
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
+            Menu menu = new Menu();
+
+            menu.Inicio();
         }
     }
 }
