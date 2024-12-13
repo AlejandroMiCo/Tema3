@@ -17,7 +17,6 @@ namespace Ejercicio2
         public void Inicio()
         {
             aula.RellenaNotas();
-
             do
             {
                 Console.Clear();
@@ -25,7 +24,7 @@ namespace Ejercicio2
                 Console.WriteLine("Opcion 2. Media de un alumno");
                 Console.WriteLine("Opcion 3. Media de una asignatura");
                 Console.WriteLine("Opcion 4. Visualizar notas de un alumno");
-                Console.WriteLine("Opcion 5. Visualizar asignaturas");
+                Console.WriteLine("Opcion 5. Visualizar notas de una asignaturas");
                 Console.WriteLine("Opcion 6. Nota maxima y minima de un alumno");
                 Console.WriteLine("Opcion 7. Visualizar tabla completa");
                 Console.WriteLine("Opcion 8. Salir");
@@ -39,61 +38,66 @@ namespace Ejercicio2
                     switch (opc - 1)
                     {
                         case 0: //Calcular la media de notas de toda la tabla.
-                            Console.WriteLine($"La media de las notas de toda la tabla es: {aula.CalcularMediasGlobales()}");
+                            Console.WriteLine(
+                                $"La media de las notas de toda la tabla es: {aula.CalcularMediasGlobales()}"
+                            );
                             Console.ReadKey();
                             break;
                         case 1: //Media de un alumno
 
-
-                            Console.WriteLine(aula.CalcularMediasAlumno(SelecionAlumno()));
+                            Console.WriteLine(
+                                $"La media del alumno selecionado es {aula.CalcularMediasAlumno(SelecionAlumno())}"
+                            );
 
                             Console.ReadKey();
 
                             break;
                         case 2: //Media de una asignatura
-                            aula.MediaDeUnaAsignatura(0);
 
+                            Console.WriteLine(
+                                $"La media de la asignatura es {aula.MediaDeUnaAsignatura(SelecionAsignatura())}"
+                            );
                             Console.ReadKey();
-
                             break;
                         case 3: //Visualizar notas de un alumno
-                            VisualizarNotasAlumno(0);
-
+                            Console.WriteLine(
+                                $"Las notas del alumno son {VisualizarNotasAlumno(SelecionAlumno())}"
+                            );
                             Console.ReadKey();
                             break;
-                        case 4: //Visualizar asignaturas
-                            VisualizarNotasAlumno(0);
-
+                        case 4: //Visualizar notas de una asignaturas
+                            Console.WriteLine(
+                                $"Las notas de la asignatura son {VisualizarNotasAsignatura(SelecionAsignatura())}"
+                            );
                             Console.ReadKey();
-
                             break;
                         case 5: //Nota maxima y minima de un alumno
-                            aula.NotasMaxAndMin(0, out int max, out int min);
 
+                            Console.ReadKey();
+                            aula.NotasMaxAndMin(SelecionAlumno(), out int max, out int min);
+                            Console.WriteLine($"La nota maxima es {max} y la minima es {min}");
                             Console.ReadKey();
 
                             break;
                         case 6: //Visualizar tabla completa
                             MostrarTabla();
-
                             Console.ReadKey();
 
                             break;
                         case 7:
                             Console.WriteLine("Hasta pronto!");
-
                             Console.ReadKey();
-
                             break;
                         default:
                             Console.WriteLine("Error, intentelo de nuevo por favor");
+                            Console.ReadKey();
                             break;
                     }
                 }
             } while (opc != 8);
         }
 
-        private void VisualizarNotasAlumno(int alumno)
+        private string VisualizarNotasAlumno(int alumno)
         {
             int[] notasAlumno = new int[aula.notas.GetLength(1)];
 
@@ -102,12 +106,10 @@ namespace Ejercicio2
                 notasAlumno[i] = aula.notas[alumno, i];
             }
 
-            Console.WriteLine(
-                $"%3{notasAlumno[0]} %3{notasAlumno[1]} %3{notasAlumno[2]} %3{notasAlumno[3]}"
-            );
+            return $"{notasAlumno[0], 3} {notasAlumno[1], 3} {notasAlumno[2], 3} {notasAlumno[3], 3}";
         }
 
-        private void VisualizarNotasAsignatura(int asignatura)
+        private string VisualizarNotasAsignatura(int asignatura)
         {
             int[] notasAsignauras = new int[aula.notas.GetLength(0)];
 
@@ -116,20 +118,20 @@ namespace Ejercicio2
                 notasAsignauras[i] = aula.notas[i, asignatura];
             }
 
-            Console.WriteLine(
-                $"%3{notasAsignauras[0]} %3{notasAsignauras[1]} %3{notasAsignauras[2]} %3{notasAsignauras[3]}"
-            );
+            return $"%3{notasAsignauras[0]} %3{notasAsignauras[1]} %3{notasAsignauras[2]} %3{notasAsignauras[3]}";
         }
 
         private void MostrarTabla()
         {
-            Console.WriteLine($"{(Asignaturas)0,25}{(Asignaturas)1,15}{(Asignaturas)2,15}{(Asignaturas)3,15}");
+            Console.WriteLine(
+                $"{(Asignaturas)0, 25}{(Asignaturas)1, 15}{(Asignaturas)2, 15}{(Asignaturas)3, 15}"
+            );
             for (int i = 0; i < aula.notas.GetLength(0); i++)
             {
-                Console.Write($"{aula[i],-10}");
+                Console.Write($"{aula[i], -10}");
                 for (int j = 0; j < aula.notas.GetLength(1); j++)
                 {
-                    Console.Write($"{aula.notas[i, j],15}");
+                    Console.Write($"{aula.notas[i, j], 15}");
                 }
                 Console.WriteLine();
             }
@@ -157,15 +159,14 @@ namespace Ejercicio2
                     }
                     else
                     {
-                        Console.WriteLine("El numero no se enuentra dentro de los valores de la tabla");
+                        Console.WriteLine(
+                            "El numero no se enuentra dentro de los valores de la tabla"
+                        );
                     }
                 }
-            }
-            while (error);
-
-            return opc+1;
+            } while (error);
+            return opc - 1;
         }
-
 
         private int SelecionAsignatura()
         {
@@ -175,7 +176,7 @@ namespace Ejercicio2
                 Console.WriteLine("Por favor, selecione la asignatura por su numero");
                 for (int i = 0; i < Enum.GetValues(typeof(Asignaturas)).Length; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {aula[i]}");
+                    Console.WriteLine($"{i + 1}. {(Asignaturas)i}");
                 }
                 if (!int.TryParse(Console.ReadLine(), out opc))
                 {
@@ -189,13 +190,13 @@ namespace Ejercicio2
                     }
                     else
                     {
-                        Console.WriteLine("El numero no se enuentra dentro de los valores de la tabla");
+                        Console.WriteLine(
+                            "El numero no se enuentra dentro de los valores de la tabla"
+                        );
                     }
                 }
-            }
-            while (error);
-
-            return opc+1;
+            } while (error);
+            return opc + 1;
         }
     }
 }

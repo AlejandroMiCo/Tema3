@@ -28,8 +28,7 @@ class Aula
 
     }
 
-    //????
-    public int GetAlumno(string alumno)
+    public int GetAlumno(string alumno)///????????
     {
         for (int j = 0; j < alumnos.Length; j++)
         {
@@ -76,7 +75,7 @@ class Aula
         }
     }
 
-    public int CalcularMediasGlobales()
+    public double CalcularMediasGlobales()
     {
         int acu = 0;
 
@@ -88,9 +87,9 @@ class Aula
         return acu / notas.Length;
     }
 
-    public int CalcularMediasAlumno(int alumno)
+    public double CalcularMediasAlumno(int alumno)
     {
-        int acu = 0;
+        double acu = 0;
         for (int j = 0; j < notas.GetLength(1); j++)
         {
             acu += notas[alumno, j];
@@ -99,9 +98,9 @@ class Aula
         return acu / notas.GetLength(1);
     }
 
-    public int MediaDeUnaAsignatura(int asignatura)
+    public double MediaDeUnaAsignatura(int asignatura)
     {
-        int acu = 0;
+        double acu = 0;
 
         for (int i = 0; i < notas.GetLength(0); i++)
         {
