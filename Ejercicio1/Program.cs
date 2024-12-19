@@ -13,7 +13,7 @@ namespace Ejercicio1    //Preguntar a curro si ya esta validado.No tiene pinta
     internal static class Program// no informa al usuario. ---
                                  // Eliminar: pide dos veces la IP. ---
                                  // Bucle inf si no hay datos. --
-                                 // Si ram no valida bucle inf. --
+                                 // Si ram no valida bucle inf. --asdasd
     {
         static void Main(string[] args)
         {
